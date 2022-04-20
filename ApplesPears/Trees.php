@@ -24,7 +24,7 @@ abstract class Tree
     {
         $fruits_count = rand($this->min_fruits, $this->max_fruits);
         for ($i = 0; $i < $fruits_count; $i++) {
-            $this->fruits[] = new $this->fruit;
+            $this->fruits[] = new $this->fruit();
         }
     }
 

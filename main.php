@@ -10,13 +10,13 @@ $trees = array();
 
 // загрузка яблонь и груш
 for ($i = 0; $i < 10; $i++) {
-    $trees[] = new ApplesTree;
+    $trees[] = new ApplesTree();
 }
 for ($i = 0; $i < 15; $i++) {
-    $trees[] = new PearsTree;
+    $trees[] = new PearsTree();
 }
 
-$collector = new Collector;
+$collector = new Collector();
 $collector->loadTrees($trees);
 $fruits = $collector->collectAllFruits();
 

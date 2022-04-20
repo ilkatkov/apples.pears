@@ -8,7 +8,7 @@ namespace ApplesPears\Fruits;
 abstract class Fruit
 {
     private $weight;
-    
+
     public function __construct()
     {
         $this->weight = rand($this->min_weight, $this->max_weight);
