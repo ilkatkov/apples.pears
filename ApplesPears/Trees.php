@@ -2,9 +2,9 @@
 
 namespace ApplesPears\Trees;
 
-/**
- * Этот абстрактный класс является основой для всех деревьев.
- */
+use ApplesPears\Fruits\Apple;
+use ApplesPears\Fruits\Pear;
+
 abstract class Tree
 {
     public function __construct()
@@ -101,4 +101,26 @@ abstract class Tree
             "weight" => $fruits_weight
         );
     }
+}
+
+/**
+ * Класс для создания дереьев яблок.
+ */
+class ApplesTree extends Tree
+{
+    protected $min_fruits = 40;
+    protected $max_fruits = 50;
+    protected $fruit_name = "Яблоко";
+    protected $fruit = Apple::class;
+}
+
+/**
+ * Класс для создания дереьев груш.
+ */
+class PearsTree extends Tree
+{
+    protected $min_fruits = 0;
+    protected $max_fruits = 20;
+    protected $fruit_name = "Груша";
+    protected $fruit = Pear::class;
 }

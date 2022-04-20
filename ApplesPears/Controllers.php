@@ -16,7 +16,11 @@ class Collector
 
     /**
      * Возвращает массив данных о всех собранных фруктах.
-     *
+     * 
+     * "name" - название плода,
+     * "count" - количество фруктов,
+     * "weight" - общий вес фруктов,
+     * 
      * @return array собранные фрукты.
      */
     public function collectAllFruits(): array

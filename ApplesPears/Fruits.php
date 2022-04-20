@@ -22,3 +22,21 @@ abstract class Fruit
         return $this->weight;
     }
 }
+
+/**
+ * Класс для создания яблок.
+ */
+class Apple extends Fruit
+{
+    protected $min_weight = 150;
+    protected $max_weight = 180;
+}
+
+/**
+ * Класс для создания груш.
+ */
+class Pear extends Fruit
+{
+    protected $min_weight = 130;
+    protected $max_weight = 170;
+}
