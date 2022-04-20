@@ -7,6 +7,8 @@ use ApplesPears\Fruits\Pear;
 
 abstract class Tree
 {
+    private $uuid;
+    private $fruits;
     public function __construct()
     {
         $this->uuid = uniqid();

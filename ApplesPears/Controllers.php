@@ -9,6 +9,8 @@ use ApplesPears\Trees\Tree;
  */
 class Collector
 {
+    private $trees;
+
     public function __construct()
     {
         $this->trees = array();
