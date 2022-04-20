@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Этот класс является контроллером сборщика фруктов.
+ */
 class Controller
 {
     public function __construct()
@@ -7,7 +10,12 @@ class Controller
         $this->trees = array();
     }
 
-    public function collectAllFruits()
+    /**
+     * Возвращает массив данных о всех собранных фруктах.
+     *
+     * @return array собранные фрукты.
+     */
+    public function collectAllFruits(): array
     {
         $result = array();
         foreach ($this->trees as $tree) {
@@ -22,19 +30,32 @@ class Controller
         return $result;
     }
 
-    public function loadTrees($trees)
+    /**
+     * Загружает деревья плодов в сборщик фруктов.
+     *
+     * @param array $trees массив дервеьев.
+     */
+    public function loadTrees(array $trees): void
     {
         foreach ($trees as $tree) {
             $this->addTree($tree);
         }
     }
 
-    private function addTree($tree)
+    /**
+     * Добавляет дерево в массив $trees.
+     *
+     * @param Tree $tree дерево.
+     */
+    private function addTree(Tree $tree): void
     {
         $this->trees[] = $tree;
     }
 }
 
+/**
+ * Этот абстрактный класс является основой для всех фруктов.
+ */
 abstract class Fruit
 {
     public function __construct()
@@ -42,39 +63,52 @@ abstract class Fruit
         $this->weight = rand($this->min_weight, $this->max_weight);
     }
 
-    public function getWeight()
+    /**
+     * Возвращает вес фрукта.
+     *
+     * @return int вес фрукта.
+     */
+    public function getWeight(): int
     {
         return $this->weight;
     }
 }
 
+/**
+ * Класс для создания яблок.
+ */
 class Apple extends Fruit
 {
     protected $min_weight = 150;
     protected $max_weight = 180;
 }
 
+/**
+ * Класс для создания груш.
+ */
 class Pear extends Fruit
 {
     protected $min_weight = 130;
     protected $max_weight = 170;
 }
 
+/**
+ * Этот абстрактный класс является основой для всех деревьев.
+ */
 abstract class Tree
 {
     public function __construct()
     {
-        $this->id = uniqid();
+        $this->uuid = uniqid();
         $this->fruits = array();
         $this->setFruits();
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    private function setFruits()
+    /**
+     * Генерирует и устанавливает фрукты на дереве.
+     *
+     */
+    private function setFruits(): void
     {
         $fruits_count = rand($this->min_fruits, $this->max_fruits);
         for ($i = 0; $i < $fruits_count; $i++) {
@@ -82,22 +116,42 @@ abstract class Tree
         }
     }
 
-    private function getFruitName()
+    /**
+     * Возвращает название фрукта.
+     *
+     * @return string название фрукта.
+     */
+    private function getFruitName(): string
     {
         return $this->fruit_name;
     }
 
-    private function getFruits()
+    /**
+     * Возвращает массив фруктов дерева.
+     *
+     * @return array массив фруктов.
+     */
+    private function getFruits(): array
     {
         return $this->fruits;
     }
 
-    private function getFruitsCount()
+    /**
+     * Возвращает число фруктов на дереве.
+     *
+     * @return int количество фруктов.
+     */
+    private function getFruitsCount(): int
     {
         return count($this->getFruits());
     }
 
-    private function getFruitsWeight()
+    /**
+     * Возвращает общий вес фруктов на дереве.
+     *
+     * @return int общий вес фруктов.
+     */
+    private function getFruitsWeight(): int
     {
         $total_weight = 0;
         foreach ($this->fruits as $fruit) {
@@ -106,7 +160,26 @@ abstract class Tree
         return $total_weight;
     }
 
-    public function collectFruits()
+    /**
+     * Возвращает уникальный регистрационный номер дерева.
+     *
+     * @return string UUID дерева.
+     */
+    public function getUUID(): string
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * Возвращает массив данных о фруктах с дерева и очищает список $fruits.
+     *
+     * "fruit" - название плода,
+     * "count" - количество фруктов,
+     * "weight" - общий вес фруктов,
+     *
+     * @return array массив данных о собранных фруктах.
+     */
+    public function collectFruits(): array
     {
         $fruit_name = $this->getFruitName();
         $fruits_count = $this->getFruitsCount();
@@ -120,6 +193,9 @@ abstract class Tree
     }
 }
 
+/**
+ * Класс для создания дереьев яблок.
+ */
 class ApplesTree extends Tree
 {
     protected $min_fruits = 40;
@@ -128,6 +204,9 @@ class ApplesTree extends Tree
     protected $fruit = Apple::class;
 }
 
+/**
+ * Класс для создания дереьев груш.
+ */
 class PearsTree extends Tree
 {
     protected $min_fruits = 0;
@@ -136,35 +215,17 @@ class PearsTree extends Tree
     protected $fruit = Pear::class;
 }
 
-$trees = [
-    new ApplesTree(),
-    new ApplesTree(),
-    new ApplesTree(),
-    new ApplesTree(),
-    new ApplesTree(),
-    new ApplesTree(),
-    new ApplesTree(),
-    new ApplesTree(),
-    new ApplesTree(),
-    new ApplesTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-    new PearsTree(),
-];
 
-$controller = new Controller();
+$trees = array();
+// загрузка яблонь и груш
+for ($i = 0; $i < 10; $i++) {
+    $trees[] = new ApplesTree;
+}
+for ($i = 0; $i < 15; $i++) {
+    $trees[] = new PearsTree;
+}
+
+$controller = new Controller;
 $controller->loadTrees($trees);
 $fruits = $controller->collectAllFruits();
 
